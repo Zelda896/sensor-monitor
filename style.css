@@ -1,0 +1,238 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* 仪表板布局 */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+}
+
+/* 卡片主题色 */
+.temperature {
+    --accent-color: #ff6b6b;
+    --accent-light: #ff8e8e;
+}
+
+.humidity {
+    --accent-color: #4ecdc4;
+    --accent-light: #6ed5cd;
+}
+
+.light {
+    --accent-color: #ffe66d;
+    --accent-light: #ffeb85;
+}
+
+.pwm {
+    --accent-color: #a8e6cf;
+    --accent-light: #b8ebd7;
+}
+
+/* 卡片头部 */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header h2 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.icon {
+    font-size: 2rem;
+    opacity: 0.8;
+}
+
+/* 卡片内容 */
+.card-content {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.value {
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+.unit {
+    font-size: 1.2rem;
+    color: #888;
+    font-weight: 500;
+}
+
+/* 进度条 */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* 底部样式 */
+footer {
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.status-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.connect-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.connect-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.connect-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#mqtt-status {
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 20px;
+        max-width: 400px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .value {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .value {
+        font-size: 2rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.1rem;
+    }
+}

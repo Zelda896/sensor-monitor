@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传感器数据监控 - 后端API版本</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>传感器数据监控</h1>
+            <p class="subtitle">实时环境数据展示 - 后端API版本</p>
+        </header>
+
+        <main class="dashboard">
+            <div class="card temperature clickable" data-sensor="temperature">
+                <div class="card-header">
+                    <h2>温度</h2>
+                    <span class="icon">🌡️</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="temperature">25.6</div>
+                    <div class="unit">°C</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="temp-progress"></div>
+                </div>
+                <div class="card-overlay">
+                    <span class="chart-icon">📊</span>
+                    <span class="chart-text">点击查看趋势</span>
+                </div>
+            </div>
+
+            <div class="card humidity clickable" data-sensor="humidity">
+                <div class="card-header">
+                    <h2>湿度</h2>
+                    <span class="icon">💧</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="humidity">65.2</div>
+                    <div class="unit">%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="humidity-progress"></div>
+                </div>
+                <div class="card-overlay">
+                    <span class="chart-icon">📊</span>
+                    <span class="chart-text">点击查看趋势</span>
+                </div>
+            </div>
+
+            <div class="card light clickable" data-sensor="light">
+                <div class="card-header">
+                    <h2>光感</h2>
+                    <span class="icon">☀️</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="light">750</div>
+                    <div class="unit">lux</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="light-progress"></div>
+                </div>
+                <div class="card-overlay">
+                    <span class="chart-icon">📊</span>
+                    <span class="chart-text">点击查看趋势</span>
+                </div>
+            </div>
+
+            <div class="card pwm clickable" data-sensor="pwm">
+                <div class="card-header">
+                    <h2>PWM</h2>
+                    <span class="icon">⚡</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="pwm">85</div>
+                    <div class="unit">%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="pwm-progress"></div>
+                </div>
+                <div class="card-overlay">
+                    <span class="chart-icon">📊</span>
+                    <span class="chart-text">点击查看趋势</span>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="status-info">
+                <p>最后更新: <span id="last-update"></span></p>
+                <p>连接状态: <span id="connection-status">未连接</span></p>
+                <div class="control-buttons">
+                    <button id="websocket-btn" class="connect-btn">连接WebSocket</button>
+                    <button id="aliyun-btn" class="connect-btn">连接阿里云IoT</button>
+                    <button id="api-test-btn" class="connect-btn">测试API</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chart.js图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <!-- Socket.io客户端 -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- 图表模态框 -->
+    <div id="chartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="chartTitle">传感器数据趋势</h2>
+                <div class="modal-controls">
+                    <select id="timeRangeSelect" class="time-range-select">
+                        <option value="1m">1分钟</option>
+                        <option value="10m">10分钟</option>
+                        <option value="1h" selected>1小时</option>
+                        <option value="24h">24小时</option>
+                    </select>
+                    <button id="refreshChart" class="refresh-btn">🔄</button>
+                    <button id="closeModal" class="close-btn">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="chartLoading" class="loading">加载中...</div>
+                <canvas id="sensorChart" width="800" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 项目脚本文件 -->
+    <script src="frontend-api.js"></script>
+</body>
+</html>

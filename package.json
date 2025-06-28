@@ -1,0 +1,33 @@
+{
+  "name": "sensor-monitor",
+  "version": "1.0.0",
+  "description": "传感器数据监控系统 - 支持前端直连和后端API双模式",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "build": "echo 'Build completed'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sensor",
+    "iot",
+    "monitoring",
+    "express",
+    "socket.io"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "alibabacloud-iot-device-sdk": "^1.2.8",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传感器数据监控</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>传感器数据监控</h1>
+            <p class="subtitle">实时环境数据展示</p>
+        </header>
+
+        <main class="dashboard">
+            <div class="card temperature">
+                <div class="card-header">
+                    <h2>温度</h2>
+                    <span class="icon">🌡️</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="temperature">25.6</div>
+                    <div class="unit">°C</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="temp-progress"></div>
+                </div>
+            </div>
+
+            <div class="card humidity">
+                <div class="card-header">
+                    <h2>湿度</h2>
+                    <span class="icon">💧</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="humidity">65.2</div>
+                    <div class="unit">%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="humidity-progress"></div>
+                </div>
+            </div>
+
+            <div class="card light">
+                <div class="card-header">
+                    <h2>光感</h2>
+                    <span class="icon">☀️</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="light">750</div>
+                    <div class="unit">lux</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="light-progress"></div>
+                </div>
+            </div>
+
+            <div class="card pwm">
+                <div class="card-header">
+                    <h2>PWM</h2>
+                    <span class="icon">⚡</span>
+                </div>
+                <div class="card-content">
+                    <div class="value" id="pwm">85</div>
+                    <div class="unit">%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="pwm-progress"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="status-info">
+                <p>最后更新: <span id="last-update"></span></p>
+                <p>连接状态: <span id="mqtt-status">未连接</span></p>
+                <button id="connect-btn" class="connect-btn">连接阿里云</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 阿里云IoT SDK -->
+    <script src="https://g.alicdn.com/iot-fe/iot-device-sdk-js/1.2.3/aliyun-iot-device-sdk.min.js"></script>
+
+    <!-- 项目脚本文件 -->
+    <script src="config.js"></script>
+    <script src="mqtt-client.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
