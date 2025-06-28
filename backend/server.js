@@ -33,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 静态文件服务 - 托管前端文件
 app.use(express.static(path.join(__dirname, '../')));
+app.use('/frontend', express.static(path.join(__dirname, '../frontend')));
 
 // API路由
 app.use('/api/sensors', sensorRoutes);
